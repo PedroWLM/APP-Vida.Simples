@@ -78,11 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Vida Simples — Sua rotina e seu dinheiro mais leves" },
       { name: "description", content: "Organize rotina, tarefas, hábitos e dinheiro sem complicação. Com Modo TDAH.Simples para foco em uma coisa por vez." },
       { name: "author", content: "Vida Simples" },
-      { property: "og:title", content: "Vida Simples" },
-      { property: "og:description", content: "Organize sua rotina e seu dinheiro sem se perder." },
+      { property: "og:title", content: "Vida Simples — Sua rotina e seu dinheiro mais leves" },
+      { property: "og:description", content: "Organize rotina, tarefas, hábitos e dinheiro sem complicação. Com Modo TDAH.Simples para foco em uma coisa por vez." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Vida Simples — Sua rotina e seu dinheiro mais leves" },
+      { name: "twitter:description", content: "Organize rotina, tarefas, hábitos e dinheiro sem complicação. Com Modo TDAH.Simples para foco em uma coisa por vez." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5496cabb-9263-4edb-bd0e-2c885c1385e0/id-preview-09d2424d--a6323123-e312-40f4-a2d7-c207fdfcc39a.lovable.app-1778469603458.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5496cabb-9263-4edb-bd0e-2c885c1385e0/id-preview-09d2424d--a6323123-e312-40f4-a2d7-c207fdfcc39a.lovable.app-1778469603458.png" },
     ],
     links: [
       {
