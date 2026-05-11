@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as FocoRouteImport } from './routes/foco'
+import { Route as DispositivosRouteImport } from './routes/dispositivos'
 import { Route as DinheiroRouteImport } from './routes/dinheiro'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const FocoRoute = FocoRouteImport.update({
   path: '/foco',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DispositivosRoute = DispositivosRouteImport.update({
+  id: '/dispositivos',
+  path: '/dispositivos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DinheiroRoute = DinheiroRouteImport.update({
   id: '/dinheiro',
   path: '/dinheiro',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/dispositivos': typeof DispositivosRoute
   '/foco': typeof FocoRoute
   '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/dispositivos': typeof DispositivosRoute
   '/foco': typeof FocoRoute
   '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
@@ -59,21 +67,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/dispositivos': typeof DispositivosRoute
   '/foco': typeof FocoRoute
   '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
+  fullPaths:
+    | '/'
+    | '/dinheiro'
+    | '/dispositivos'
+    | '/foco'
+    | '/perfil'
+    | '/rotina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
-  id: '__root__' | '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
+  to: '/' | '/dinheiro' | '/dispositivos' | '/foco' | '/perfil' | '/rotina'
+  id:
+    | '__root__'
+    | '/'
+    | '/dinheiro'
+    | '/dispositivos'
+    | '/foco'
+    | '/perfil'
+    | '/rotina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DinheiroRoute: typeof DinheiroRoute
+  DispositivosRoute: typeof DispositivosRoute
   FocoRoute: typeof FocoRoute
   PerfilRoute: typeof PerfilRoute
   RotinaRoute: typeof RotinaRoute
@@ -102,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FocoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dispositivos': {
+      id: '/dispositivos'
+      path: '/dispositivos'
+      fullPath: '/dispositivos'
+      preLoaderRoute: typeof DispositivosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dinheiro': {
       id: '/dinheiro'
       path: '/dinheiro'
@@ -122,6 +152,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DinheiroRoute: DinheiroRoute,
+  DispositivosRoute: DispositivosRoute,
   FocoRoute: FocoRoute,
   PerfilRoute: PerfilRoute,
   RotinaRoute: RotinaRoute,
