@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RotinaRouteImport } from './routes/rotina'
+import { Route as DinheiroRouteImport } from './routes/dinheiro'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RotinaRoute = RotinaRouteImport.update({
   id: '/rotina',
   path: '/rotina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DinheiroRoute = DinheiroRouteImport.update({
+  id: '/dinheiro',
+  path: '/dinheiro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dinheiro': typeof DinheiroRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dinheiro': typeof DinheiroRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dinheiro': typeof DinheiroRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rotina'
+  fullPaths: '/' | '/dinheiro' | '/rotina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rotina'
-  id: '__root__' | '/' | '/rotina'
+  to: '/' | '/dinheiro' | '/rotina'
+  id: '__root__' | '/' | '/dinheiro' | '/rotina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DinheiroRoute: typeof DinheiroRoute
   RotinaRoute: typeof RotinaRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/rotina'
       fullPath: '/rotina'
       preLoaderRoute: typeof RotinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dinheiro': {
+      id: '/dinheiro'
+      path: '/dinheiro'
+      fullPath: '/dinheiro'
+      preLoaderRoute: typeof DinheiroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DinheiroRoute: DinheiroRoute,
   RotinaRoute: RotinaRoute,
 }
 export const routeTree = rootRouteImport
