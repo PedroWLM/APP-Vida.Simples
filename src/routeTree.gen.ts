@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RotinaRouteImport } from './routes/rotina'
+import { Route as FocoRouteImport } from './routes/foco'
 import { Route as DinheiroRouteImport } from './routes/dinheiro'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RotinaRoute = RotinaRouteImport.update({
   id: '/rotina',
   path: '/rotina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FocoRoute = FocoRouteImport.update({
+  id: '/foco',
+  path: '/foco',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DinheiroRoute = DinheiroRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/foco': typeof FocoRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/foco': typeof FocoRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
+  '/foco': typeof FocoRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dinheiro' | '/rotina'
+  fullPaths: '/' | '/dinheiro' | '/foco' | '/rotina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dinheiro' | '/rotina'
-  id: '__root__' | '/' | '/dinheiro' | '/rotina'
+  to: '/' | '/dinheiro' | '/foco' | '/rotina'
+  id: '__root__' | '/' | '/dinheiro' | '/foco' | '/rotina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DinheiroRoute: typeof DinheiroRoute
+  FocoRoute: typeof FocoRoute
   RotinaRoute: typeof RotinaRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/rotina'
       fullPath: '/rotina'
       preLoaderRoute: typeof RotinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foco': {
+      id: '/foco'
+      path: '/foco'
+      fullPath: '/foco'
+      preLoaderRoute: typeof FocoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dinheiro': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DinheiroRoute: DinheiroRoute,
+  FocoRoute: FocoRoute,
   RotinaRoute: RotinaRoute,
 }
 export const routeTree = rootRouteImport
