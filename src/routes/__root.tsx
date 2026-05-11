@@ -9,6 +9,9 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AppShell } from "@/components/AppShell";
+import { AppStoreProvider } from "@/lib/app-store";
+import { useLocation } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -110,10 +113,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const loc = useLocation();
+  const noShell = loc.pathname.startsWith("/onboarding") || loc.pathname.startsWith("/cadastro");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AppStoreProvider>
+        {noShell ? <Outlet /> : <AppShell><Outlet /></AppShell>}
+      </AppStoreProvider>
     </QueryClientProvider>
   );
 }
