@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RotinaRouteImport } from './routes/rotina'
+import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as FocoRouteImport } from './routes/foco'
 import { Route as DinheiroRouteImport } from './routes/dinheiro'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const RotinaRoute = RotinaRouteImport.update({
   id: '/rotina',
   path: '/rotina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FocoRoute = FocoRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
   '/foco': typeof FocoRoute
+  '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
   '/foco': typeof FocoRoute
+  '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dinheiro': typeof DinheiroRoute
   '/foco': typeof FocoRoute
+  '/perfil': typeof PerfilRoute
   '/rotina': typeof RotinaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dinheiro' | '/foco' | '/rotina'
+  fullPaths: '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dinheiro' | '/foco' | '/rotina'
-  id: '__root__' | '/' | '/dinheiro' | '/foco' | '/rotina'
+  to: '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
+  id: '__root__' | '/' | '/dinheiro' | '/foco' | '/perfil' | '/rotina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DinheiroRoute: typeof DinheiroRoute
   FocoRoute: typeof FocoRoute
+  PerfilRoute: typeof PerfilRoute
   RotinaRoute: typeof RotinaRoute
 }
 
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/rotina'
       fullPath: '/rotina'
       preLoaderRoute: typeof RotinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/foco': {
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DinheiroRoute: DinheiroRoute,
   FocoRoute: FocoRoute,
+  PerfilRoute: PerfilRoute,
   RotinaRoute: RotinaRoute,
 }
 export const routeTree = rootRouteImport
